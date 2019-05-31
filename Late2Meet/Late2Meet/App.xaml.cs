@@ -3,11 +3,27 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using Late2Meet.Services;
 using Late2Meet.Views;
+using Late2Meet.Data;
+using SQLite;
+using System.IO;
 
 namespace Late2Meet
 {
     public partial class App : Application
     {
+        static L2MDatabase database;
+
+        public static L2MDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new L2MDatabase(Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "L2MDB.db3"));
+                }
+                return database;
+            }
+        }
 
         public App()
         {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Late2Meet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,11 +18,19 @@ namespace Late2Meet.Views
             InitializeComponent();
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        async void OnMemberAddedClicked(object sender, EventArgs e)
         {
-            string text = MainEntry.Text;
-
-            MainLabel.Text = "Hello" + text;
+            await Navigation.PushAsync(new MemberEntryPage
+            {
+                BindingContext = new Member()
+            });
         }
+
+        //private void Button_Clicked(object sender, EventArgs e)
+        //{
+        //    string text = MainEntry.Text;
+
+        //    MainLabel.Text = "Hello" + text;
+        //}
     }
 }

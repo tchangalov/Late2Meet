@@ -5,15 +5,24 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Late2Meet.Views.SettingsPage">
+    
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="+"
+                     Clicked="OnMemberAddedClicked" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout>
             <Label Text="Settings"
-                VerticalOptions="StartAndExpand" 
+                VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
-            <Entry x:Name="MainEntry"/>
-            <Button Clicked="Button_Clicked"
-                    Text="Say Hello!"/>
-            <Label x:Name="MainLabel"/>
+            
+            
+            <!--<Entry x:Name="MainEntry"/>-->
+            <Button Clicked="OnMemberAddedClicked"
+                    Text="Add Member"/>
+            <!--<Label x:Name="MainLabel"/>-->
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
