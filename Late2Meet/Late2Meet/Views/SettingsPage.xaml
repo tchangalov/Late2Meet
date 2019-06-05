@@ -6,22 +6,31 @@
              mc:Ignorable="d"
              x:Class="Late2Meet.Views.SettingsPage">
     
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="+"
                      Clicked="OnMemberAddedClicked" />
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Margin="10">
             <Label Text="Settings"
-                VerticalOptions="CenterAndExpand" 
+                VerticalOptions="Start" 
                 HorizontalOptions="CenterAndExpand" />
             
-            
-            <!--<Entry x:Name="MainEntry"/>-->
             <Button Clicked="OnMemberAddedClicked"
-                    Text="Add Member"/>
-            <!--<Label x:Name="MainLabel"/>-->
+                Text="Add Member"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"/>
+            
+            <Button Clicked="OnMemberDeletedClicked"
+                Text="Delete Member"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"/>
+            
+            <Button Clicked="OnSetDefaultsClicked"
+                Text="Set Defaults"
+                VerticalOptions="Start" 
+                HorizontalOptions="CenterAndExpand"/>
             
         </StackLayout>
     </ContentPage.Content>

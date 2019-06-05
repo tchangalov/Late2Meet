@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="Late2Meet.Views.MemberDeletionPage"
+             Title="Member Entry">
+
+
+    <StackLayout Margin="20">
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="deleteSelectedButton"
+                Text="Delete Selected" 
+                    IsEnabled="False"
+                    Clicked="OnDeleteSelectedButtonClicked" />
+            <Button x:Name="deleteAllButton" Grid.Column="1"
+                    Text="Delete All" 
+                    Clicked="OnDeleteAllButtonClicked"/>
+        </Grid>
+
+        <CollectionView x:Name="listView" 
+                            Margin="10,10"
+                            EmptyView="No items to display"
+                            SelectionMode="Multiple"
+                            SelectionChanged="OnCollectionViewSelectionChanged">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame BorderColor="LightGray" CornerRadius="5" HasShadow="True">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="65*" />
+                                <ColumnDefinition Width="35*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Column="0" BackgroundColor="White">
+                                <Label Text="{Binding Name}" HorizontalOptions="Center" VerticalOptions="FillAndExpand"/>
+                            </StackLayout>
+                            <StackLayout Grid.Column="1" BackgroundColor="White">
+                                <Label Text="{Binding Balance}" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+                            </StackLayout>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <!--<Editor Placeholder="TODO" 
+                Text="{Binding Name}" />
+        <Entry Text="{Binding Balance}" Placeholder="0" Keyboard="Numeric"  />-->
+
+        <!--<Button Text="Save" Clicked="OnSaveButtonClicked" />-->
+
+        <!--<ListView x:Name="listView"
+                        Margin="20"
+                        ItemSelected="OnListViewItemSelected">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Name}"
+                          Detail="{Binding Balance}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>-->
+
+    </StackLayout>
+</ContentPage>

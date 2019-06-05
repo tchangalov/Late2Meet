@@ -4,23 +4,96 @@
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
+             x:Name="Page"
              x:Class="Late2Meet.Views.LeaderboardPage">
+   
+    <ContentPage.Resources>
+        <Style TargetType="Grid">
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup x:Name="CommonStates">
+                        <VisualState x:Name="Normal" />
+                        <VisualState x:Name="Selected">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" 
+                                        Value="LightSkyBlue" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+    
     <ContentPage.Content>
-        <StackLayout>
+        
+        <StackLayout Margin="0, 10, 0, 0">
             <Label Text="Leaderboard"
-                VerticalOptions="CenterAndExpand" 
+                VerticalOptions="StartAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
 
-            <ListView x:Name="listView"
-                        Margin="20"
-                        ItemSelected="OnListViewItemSelected">
-                <ListView.ItemTemplate>
+                <Button Grid.Column="0" x:Name="advancedAddButton" Clicked="OnAdvancedBalanceAddClicked" IsEnabled="False" Text="Quick Add"/>
+
+                <Label Grid.Column="1" x:Name="totalAmount"/>
+            </Grid>
+            
+            
+
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="65*" />
+                    <ColumnDefinition Width="35*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label Text="Name" Grid.Column="0" Grid.Row="0" HorizontalOptions="Center" VerticalOptions="FillAndExpand" />
+                <Label Text="Balance" Grid.Column="1" Grid.Row="0" HorizontalOptions="Start" VerticalOptions="FillAndExpand"/>
+            </Grid>
+
+            <CollectionView x:Name="listView" 
+                            Margin="10,10"
+                            EmptyView="No items to display"
+                            SelectionMode="Multiple"
+                            SelectionChanged="OnCollectionViewSelectionChanged">
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell Text="{Binding Name}"
-                          Detail="{Binding Balance}" />
+                        <!--<Frame BorderColor="LightGray" CornerRadius="5" HasShadow="True">-->
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="33*" />
+                                    <ColumnDefinition Width="33*" />
+                                    <ColumnDefinition Width="34*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+                                
+                                <StackLayout Grid.Column="0">
+                                    <Label Text="{Binding Name}" 
+                                           HorizontalOptions="Start" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="1">
+                                    <Label Text="{Binding Balance}" 
+                                           HorizontalOptions="Center" />
+                                </StackLayout>
+                                <StackLayout Grid.Column="2">
+                                    <Button Text="Quick Add" 
+                                            Clicked="OnQuickBalanceAddClicked" 
+                                            CommandParameter="{Binding .}"  
+                                            HorizontalOptions="End"/>
+                                </StackLayout>
+                            </Grid>
+                        <!--</Frame>-->
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

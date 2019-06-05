@@ -26,11 +26,20 @@ namespace Late2Meet.Views
             });
         }
 
-        //private void Button_Clicked(object sender, EventArgs e)
-        //{
-        //    string text = MainEntry.Text;
+        async void OnMemberDeletedClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MemberDeletionPage
+            {
+                BindingContext = new Member()
+            });
+        }
 
-        //    MainLabel.Text = "Hello" + text;
-        //}
+        async void OnSetDefaultsClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new SetDefaultsPage
+            {
+                BindingContext = new Member()
+            });
+        }
     }
 }

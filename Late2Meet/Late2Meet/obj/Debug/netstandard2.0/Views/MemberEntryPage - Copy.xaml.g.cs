@@ -8,12 +8,12 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Late2Meet.Views.MemberEntryPage.xaml", "Views/MemberEntryPage.xaml", typeof(global::Late2Meet.Views.MemberEntryPage))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("Late2Meet.Views.MemberEntryPage - Copy.xaml", "Views/MemberEntryPage - Copy.xaml", typeof(global::Late2Meet.Views.MemberEntryPage))]
 
 namespace Late2Meet.Views {
     
     
-    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\MemberEntryPage.xaml")]
+    [global::Xamarin.Forms.Xaml.XamlFilePathAttribute("Views\\MemberEntryPage - Copy.xaml")]
     public partial class MemberEntryPage : global::Xamarin.Forms.ContentPage {
         
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Xamarin.Forms.Build.Tasks.XamlG", "0.0.0.0")]

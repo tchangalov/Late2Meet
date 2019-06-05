@@ -25,7 +25,22 @@ namespace Late2Meet.Data
 
         public Task<List<Member>> GetMembersOrderByBalanceAsync()
         {
-            return _database.Table<Member>().OrderByDescending(i => i.Balance).ToListAsync();
+            return _database.Table<Member>()
+                .OrderByDescending(x => x.Balance)
+                .ThenByDescending(x => x.Name)
+                .ToListAsync();
+        }
+        
+        public Task<List<Member>> GetMembersOrderByNameAsync()
+        {
+            return _database.Table<Member>()
+                .OrderByDescending(x => x.Name)
+                .ToListAsync();
+        }
+
+        public Task<decimal> GetTotalBalanceAsync()
+        {
+            return _database.ExecuteScalarAsync<decimal>("SELECT SUM(Balance) AS Balance from Member");
         }
 
         public Task<Member> GetMemberAsync(int id)
@@ -33,6 +48,11 @@ namespace Late2Meet.Data
             return _database.Table<Member>()
                             .Where(i => i.Id == id)
                             .FirstOrDefaultAsync();
+        }
+
+        public Task<int> DeleteAllMembersAsync()
+        {
+            return _database.ExecuteAsync("DELETE FROM Member");
         }
 
         public Task<int> SaveMemberAsync(Member member)
