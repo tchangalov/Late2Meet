@@ -22,18 +22,15 @@ namespace Late2Meet.Views
         public LeaderboardPage()
         {
             InitializeComponent();
-
-            if (Application.Current.Properties.ContainsKey(Constants.DefaultAdd))
-            {
-                Entry defaultAddValueEntry = (Entry)Application.Current.Properties[Constants.DefaultAdd];
-                BalanceAddValue = (decimal)new DecimalConverter().ConvertBack(defaultAddValueEntry.Text, null, null, null);
-            }
         }
 
         protected override async void OnAppearing()
         {
             base.OnAppearing();
             UpdateMembersView();
+            DeselectEntities();
+            checkEnableOrDisable();
+            BalanceAddValue = Config.AddValue;
         }
 
         /* 
@@ -41,7 +38,7 @@ namespace Late2Meet.Views
          */
         private async void UpdateMembersView()
         {
-            listView.ItemsSource = await App.Database.GetMembersOrderByBalanceAsync();
+            listView.ItemsSource = await App.Database.GetMembersOrderByNameAsync();
             try
             {
                 CurrentTotalAmount = await App.Database.GetTotalBalanceAsync();
@@ -49,38 +46,26 @@ namespace Late2Meet.Views
             }
             catch (NullReferenceException e)
             {
-                totalAmount.Text = "$ --";
+                totalAmount.Text = "Total $ --";
             }
         }
 
         public void updateTotal()
         {
-            totalAmount.Text = "$ " + CurrentTotalAmount.ToString();
+            totalAmount.Text = "Total " + String.Format("{0:$#,##0.00}", CurrentTotalAmount);
         }
 
         async void OnAdvancedBalanceAddClicked(object sender, EventArgs e)
         {
-            await Navigation.PushPopupAsync(new TransparentPopup());
+            var popup = new TransparentPopupPage(this);
+            await Navigation.PushPopupAsync(popup);
         }
 
-        //async void OnAdvancedBalanceAddClicked(object sender, EventArgs e)
-        //{
-        //    IList<object> members = listView.SelectedItems;
-        //    var tasks = new List<Task<int>>();
-
-        //    foreach ( var member in members)
-        //    {
-        //        tasks.Add(BalanceAddAux((Member) member, BalanceAddValue));
-        //    }
-        //    await Task.WhenAll();
-        //    DeselectEntities();
-        //    checkEnableOrDisable();
-        //}
 
         public async void OnQuickBalanceAddClicked(Object Sender, EventArgs args)
         {
-            Button button = (Button) Sender;
-            Member member = (Member) button.CommandParameter;
+            Button button = (Button)Sender;
+            Member member = (Member)button.CommandParameter;
             await BalanceAddAux(member, BalanceAddValue);
         }
 
@@ -92,12 +77,26 @@ namespace Late2Meet.Views
             return await App.Database.SaveMemberAsync(curr);
         }
 
+        public async Task<int> BalanceSetAux(Member curr, decimal newBalance)
+        {
+            decimal delta = newBalance - curr.Balance;
+            curr.Balance = newBalance;
+            CurrentTotalAmount += delta;
+            updateTotal();
+            return await App.Database.SaveMemberAsync(curr);
+        }
+
+        public IList<object> getSelectedItems()
+        {
+            return listView.SelectedItems;
+        }
+
         void OnCollectionViewSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             checkEnableOrDisable();
         }
 
-        private void DeselectEntities()
+        public void DeselectEntities()
         {
             listView.SelectedItems.Clear();
         }

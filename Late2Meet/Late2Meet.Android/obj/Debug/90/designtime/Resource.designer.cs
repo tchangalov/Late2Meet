@@ -5726,6 +5726,9 @@ namespace Late2Meet.Droid
 			// aapt resource value: 0x7F090056
 			public const int avd_show_password = 2131296342;
 			
+			// aapt resource value: 0x7F010002
+			public const int close_circle_button = 2130771970;
+			
 			// aapt resource value: 0x7F090057
 			public const int design_bottom_navigation_item_background = 2131296343;
 			
@@ -6395,8 +6398,8 @@ namespace Late2Meet.Droid
 			// aapt resource value: 0x7F090070
 			public const int tooltip_frame_light = 2131296368;
 			
-			// aapt resource value: 0x7F010002
-			public const int xamarin_logo = 2130771970;
+			// aapt resource value: 0x7F010003
+			public const int xamarin_logo = 2130771971;
 			
 			static Drawable()
 			{

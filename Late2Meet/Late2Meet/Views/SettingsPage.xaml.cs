@@ -34,12 +34,28 @@ namespace Late2Meet.Views
             });
         }
 
+        async void OnMemberEditClicked(object sender, EventArgs e)
+        {
+            await Navigation.PushAsync(new MemberEditPage
+            {
+                BindingContext = new Member()
+            });
+        }
+
         async void OnSetDefaultsClicked(object sender, EventArgs e)
         {
             await Navigation.PushAsync(new SetDefaultsPage
             {
                 BindingContext = new Member()
             });
+        }
+
+        MainPage RootPage { get => Application.Current.MainPage as MainPage; }
+
+        public async void OnResetAllCountsClicked(object sender, EventArgs e)
+        {
+            await App.Database.ResetAllCounts();
+            MessagingCenter.Send<MainPage, int>(RootPage, "changeView", (int)MenuItemType.Leaderboard);
         }
     }
 }

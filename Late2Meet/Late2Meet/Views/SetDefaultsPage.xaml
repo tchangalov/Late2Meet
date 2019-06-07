@@ -3,13 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:local="clr-namespace:Late2Meet"
              mc:Ignorable="d"
              x:Class="Late2Meet.Views.SetDefaultsPage">
+
     <ContentPage.Content>
         <StackLayout Margin="20">
-            <Label Text="Quick Add Value:" />
-            <Entry x:Name="newDefaultValue" Keyboard="Numeric"  />
-            <Button Text="Save" Clicked="OnSaveButtonClicked" />
+            <StackLayout Orientation="Horizontal">
+                <!--<Switch x:Name="mySwitch" IsToggled="False" Toggled="switchToggle" ></Switch>
+                <Label x:Name="isNegative" FontSize="Large" FontAttributes="Bold"></Label>-->
+                <Entry x:Name="entryButton"
+                        HorizontalOptions="FillAndExpand"
+                        Keyboard="Numeric">
+                    <Entry.Behaviors>
+                        <local:LimitNumericEntryBehavior/>
+                    </Entry.Behaviors>
+                </Entry>
+            </StackLayout>
+            <Button Text="Save" Clicked="OnSaveButtonClickedAsync" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

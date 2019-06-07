@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Late2Meet.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,30 +15,35 @@ namespace Late2Meet.Views
     {
         public SetDefaultsPage()
         {
+
             InitializeComponent();
-            if (!Application.Current.Properties.ContainsKey(Constants.DefaultAdd))
-            {
-                var defaultAddValueEntry = new Entry
-                {
-                    Text = "1"
-                };
-                Application.Current.Properties[Constants.DefaultAdd] = defaultAddValueEntry;
-                newDefaultValue.Text = defaultAddValueEntry.Text;
-            }
-            else
-            {
-                Entry defaultAddValueEntry = (Entry)Application.Current.Properties[Constants.DefaultAdd];
-                newDefaultValue.Text = defaultAddValueEntry.Text;
-            }
+            entryButton.Text = Config.ValueAsString(Config.AddValue);
         }
 
-        void OnSaveButtonClicked(object sender, EventArgs e)
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
+        public async void OnSaveButtonClickedAsync(Object Sender, EventArgs args)
         {
             var defaultAddValueEntry = new Entry
             {
-                Text = newDefaultValue.Text
+                Text = entryButton.Text
             };
-            Application.Current.Properties[Constants.DefaultAdd] = defaultAddValueEntry;
+            //string result = mySwitch.IsToggled ? "-" + entryButton.Text : entryButton.Text;
+            Config.AddValue = Config.ValueAsDecimal(entryButton.Text);
+            await Navigation.PopAsync();
         }
+
+        //private void switchToggle(object sender, ToggledEventArgs e)
+        //{
+        //    isNegative.Text = e.Value ? "-" : "";
+        //}
+
+        //private void EntryButton_Unfocused(object sender, FocusEventArgs e)
+        //{
+        //    entryButton.Focus();
+        //}
     }
 }

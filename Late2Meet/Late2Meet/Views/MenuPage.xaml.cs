@@ -22,7 +22,6 @@ namespace Late2Meet.Views
             {
                 new HomeMenuItem {Id = MenuItemType.Leaderboard, Title="Leaderboard" },
                 new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings" },
-                new HomeMenuItem {Id = MenuItemType.Browse, Title="Browse" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };
 
@@ -37,6 +36,10 @@ namespace Late2Meet.Views
                 var id = (int)((HomeMenuItem)e.SelectedItem).Id;
                 await RootPage.NavigateFromMenu(id);
             };
+
+            MessagingCenter.Subscribe<MainPage, int>(this, "changeView", (sender, arg) => {
+                ListViewMenu.SelectedItem = menuItems[(int)arg];
+            });
         }
     }
 }

@@ -146,4 +146,7 @@
       <Name>Late2Meet</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\close_circle_button.png" />
+  </ItemGroup>
 </Project>

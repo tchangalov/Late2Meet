@@ -34,8 +34,13 @@ namespace Late2Meet.Data
         public Task<List<Member>> GetMembersOrderByNameAsync()
         {
             return _database.Table<Member>()
-                .OrderByDescending(x => x.Name)
+                .OrderBy(x => x.Name)
                 .ToListAsync();
+        }
+
+        public Task<int> ResetAllCounts()
+        {
+            return _database.ExecuteAsync("UPDATE Member SET Balance = 0");
         }
 
         public Task<decimal> GetTotalBalanceAsync()

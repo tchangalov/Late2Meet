@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<pages:PopupPage xmlns="http://xamarin.com/schemas/2014/forms"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+			 xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
+                 xmlns:local="clr-namespace:Late2Meet"
+                 x:Class="Late2Meet.Views.TransparentPopupPage">
+    <!--<pages:PopupPage.Animation>
+        <animations:ScaleAnimation 
+	  PositionIn="Center"
+	  PositionOut="Center"
+	  ScaleIn="1.2"
+	  ScaleOut="0.8"
+	  DurationIn="400"
+	  DurationOut="300"
+	  EasingIn="SinOut"
+	  EasingOut="SinIn"
+	  HasBackgroundAnimation="True"/>
+    </pages:PopupPage.Animation>-->
+    <StackLayout VerticalOptions="Center" HorizontalOptions="FillAndExpand" Padding="20, 20, 20, 20">
+        <StackLayout BackgroundColor="White" Padding="0, 10, 0, 0">
+            <ScrollView>
+                <AbsoluteLayout>
+                    <Frame   
+                        x:Name="FrameContainer"
+                        Margin="15"
+                        HorizontalOptions="Center"
+                        BackgroundColor="White">
+                        <StackLayout>
+                            <Label Text="Advanced Settings" TextColor="Gray" FontSize="20" HorizontalOptions="Center"></Label>
+
+                            <Grid >
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20*" />
+                                    <ColumnDefinition Width="10*" />
+                                    <ColumnDefinition Width="70*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Text="(+/-)"
+                                       Grid.Column="0" 
+                                       Grid.Row="0"
+                                       HorizontalOptions="CenterAndExpand"></Label>
+
+                                <Switch x:Name="mySwitch" 
+                                       Grid.Column="0" 
+                                       Grid.Row="1"
+                                       IsToggled="False" 
+                                       Toggled="switchToggle"
+                                       HorizontalOptions="CenterAndExpand">
+                                </Switch>
+                                
+                                <Label x:Name="isNegative" 
+                                       Grid.Column="1" 
+                                       Grid.Row="1"
+                                       Margin="0,8,0,0"
+                                       FontSize="Large" 
+                                       FontAttributes="Bold"
+                                       HorizontalOptions="EndAndExpand"></Label>
+                                
+                                <Entry x:Name="entryButton"
+                                       Grid.Column="2" 
+                                       Grid.Row="1"
+                                       Unfocused="EntryButton_Unfocused"
+                                       HorizontalOptions="FillAndExpand"
+                                       Keyboard="Numeric">
+                                    <Entry.Behaviors>
+                                        <local:LimitNumericEntryBehavior/>
+                                    </Entry.Behaviors>
+                                </Entry>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="30*" />
+                                    <ColumnDefinition Width="70*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Button x:Name="btnSub" Text="Set" Clicked="BtnSetClicked" Grid.Column="0" Grid.Row="0"/>
+                                <Button x:Name="btnAdd" Text="Add" Clicked="BtnAddClicked" Grid.Column="1" Grid.Row="0"/>
+                            </Grid>
+                        </StackLayout>
+                    </Frame>
+                    <ContentView
+		            AbsoluteLayout.LayoutFlags="PositionProportional"
+		            AbsoluteLayout.LayoutBounds="1, 0, -1, -1">       
+                        <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCloseButtonTapped"/>
+                        </ContentView.GestureRecognizers>
+                        <Image
+		                x:Name="CloseImage"
+		                HeightRequest="30"
+		                WidthRequest="30">        
+                            <Image.Source>
+                                <OnPlatform
+			                    x:TypeArguments="ImageSource"
+			                    Android="close_circle_button.png"
+			                    iOS="close_circle_button.png"/>
+                            </Image.Source>
+                        </Image>
+                    </ContentView>
+                </AbsoluteLayout>
+
+            </ScrollView>
+        </StackLayout>
+    </StackLayout>
+</pages:PopupPage>
