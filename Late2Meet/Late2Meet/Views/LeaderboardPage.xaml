@@ -7,6 +7,10 @@
              x:Name="Page"
              x:Class="Late2Meet.Views.LeaderboardPage">
 
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Sync" Clicked="SyncClicked" />
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Resources>
         <Style TargetType="Grid">
             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -24,9 +28,9 @@
             </Setter>
         </Style>
     </ContentPage.Resources>
-    
+
     <ContentPage.Content>
-        
+
         <StackLayout Margin="0, 10, 0, 0">
             <Label Text="Data" 
                    FontSize="Large" 
@@ -36,7 +40,7 @@
 
             <BoxView HeightRequest="1" 
                      Color="DarkGray"></BoxView>
-            
+
             <Label x:Name="totalAmount" 
                    Grid.Column="1" 
                    Margin="0, 0, 10, 0" 
@@ -44,7 +48,7 @@
                    FontAttributes="Bold"
                    TextColor="Green"
                    HorizontalOptions="EndAndExpand"/>
-            
+
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -62,7 +66,7 @@
                        FontAttributes="Bold"
                        HorizontalOptions="Center" 
                        VerticalOptions="FillAndExpand" />
-                
+
                 <Label Text="Balance"
                        Grid.Column="1" 
                        Grid.Row="0" 
@@ -80,32 +84,46 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <!--<Frame BorderColor="LightGray" CornerRadius="5" HasShadow="True">-->
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="33*" />
-                                    <ColumnDefinition Width="33*" />
-                                    <ColumnDefinition Width="34*" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
-                                
-                                <StackLayout Grid.Column="0">
-                                    <Label Text="{Binding Name}" 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="33*" />
+                                <ColumnDefinition Width="33*" />
+                                <ColumnDefinition Width="34*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <StackLayout Grid.Column="0">
+                                <Label Text="{Binding Name}" 
                                            HorizontalOptions="Center" />
-                                </StackLayout>
-                                <StackLayout Grid.Column="1">
+                            </StackLayout>
+                            <StackLayout Grid.Column="1">
                                 <Label Text="{Binding Balance, StringFormat='{0:$#,##0.00}'}" 
                                        HorizontalOptions="Center" 
                                        TextColor="Green"/>
-                                </StackLayout>
-                                <StackLayout Grid.Column="2">
-                                    <Button Text="Quick Add" 
+                            </StackLayout>
+                            <StackLayout Grid.Column="2">
+                                <Button Text="Quick Add" 
                                             Clicked="OnQuickBalanceAddClicked" 
                                             CommandParameter="{Binding .}"  
                                             HorizontalOptions="End"/>
-                                </StackLayout>
-                            </Grid>
+                            </StackLayout>
+                            <StackLayout Grid.Column="3">
+
+                                <Image
+		                x:Name="CloseImage"
+		                HeightRequest="30"
+		                WidthRequest="30">
+                                    <Image.Source>
+                                        <OnPlatform
+			                    x:TypeArguments="ImageSource"
+			                    Android="close_circle_button.png"
+			                    iOS="close_circle_button.png"/>
+                                    </Image.Source>
+                                </Image>
+                            </StackLayout>
+                        </Grid>
                         <!--</Frame>-->
                     </DataTemplate>
                 </CollectionView.ItemTemplate>

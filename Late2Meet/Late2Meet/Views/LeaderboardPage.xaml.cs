@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -53,6 +54,31 @@ namespace Late2Meet.Views
         public void updateTotal()
         {
             totalAmount.Text = "Total " + String.Format("{0:$#,##0.00}", CurrentTotalAmount);
+        }
+        async void SyncClicked(object sender, EventArgs e)
+        {
+            try
+            {
+                var postData = new List<KeyValuePair<string, string>>();
+                postData.Add(new KeyValuePair<string, string>("userId", "5"));
+                postData.Add(new KeyValuePair<string, string>("balance", "350.00"));
+
+                var content = new FormUrlEncodedContent(postData);
+
+                HttpClient client = new HttpClient();
+
+                client.BaseAddress = new Uri("http://192.168.29.200:8080");
+
+                var response = await client.PostAsync("http://192.168.29.200:8080/update.php", content);
+                string result = response.Content.ReadAsStringAsync().Result;
+            }
+
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", ex.ToString(), "Ok");
+                return;
+            }
+
         }
 
         async void OnAdvancedBalanceAddClicked(object sender, EventArgs e)
