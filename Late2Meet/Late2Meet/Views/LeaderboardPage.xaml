@@ -34,12 +34,10 @@
 
         <StackLayout Margin="0, 10, 0, 0">
             
-            <f9p:Button
-            x:Name="shareButton"
-            Text="SHARE PNG"
-            Grid.Row="1" />
+            <f9p:Button  x:Name="shareButton" Text="SHARE PNG" IsVisible="False"/>
             
             <Label Text="Data" 
+                   TextColor="Black"
                    FontSize="Large" 
                    FontAttributes="Bold"
                    VerticalOptions="StartAndExpand" 

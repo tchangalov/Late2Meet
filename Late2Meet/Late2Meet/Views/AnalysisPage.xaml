@@ -3,9 +3,13 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:microcharts="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms" 
-    xmlns:local="clr-namespace:Microcharts.Samples.Forms"
+    xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
     x:Class="Late2Meet.Views.AnalysisPage">
-   
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Share" Clicked="onShareButtonClicked"/>
+    </ContentPage.ToolbarItems>
+    
     <ContentPage.Content>
         <StackLayout Margin="10">
             <Label Text="Analysis" 
@@ -20,9 +24,9 @@
                    FontAttributes="Bold"/>
             <BoxView HeightRequest="1" Color="DarkGray"></BoxView>
 
-            <microcharts:ChartView x:Name="chartView"
-                                   HeightRequest="230"
-                                   HorizontalOptions="Fill"/>
+            <microcharts:ChartView x:Name="chartView"/>
+
+            <f9p:Button  x:Name="shareButton" Text="SHARE PNG" IsVisible="False"/>
 
         </StackLayout>
     </ContentPage.Content>

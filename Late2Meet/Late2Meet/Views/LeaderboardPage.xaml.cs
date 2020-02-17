@@ -98,6 +98,25 @@ namespace Late2Meet.Views
         {
             checkEnableOrDisable();
         }
+
+        public void DeselectEntities()
+        {
+            listView.SelectedItems.Clear();
+        }
+
+        void checkEnableOrDisable()
+        {
+            if (listView.SelectedItems == null || listView.SelectedItems.Count == 0)
+            {
+                advancedAddButton.IsEnabled = false;
+            }
+            else
+            {
+                advancedAddButton.IsEnabled = true;
+            }
+        }
+
+
         public async void onShareButtonClicked(object sender, EventArgs e)
         {
 
@@ -167,24 +186,5 @@ namespace Late2Meet.Views
 
             return startTag + title + tableStart + addMembers + tableEnd + subTitle + endTag;
         }
-
-        public void DeselectEntities()
-        {
-            listView.SelectedItems.Clear();
-        }
-
-        void checkEnableOrDisable()
-        {
-            if (listView.SelectedItems == null || listView.SelectedItems.Count == 0)
-            {
-                advancedAddButton.IsEnabled = false;
-            }
-            else
-            {
-                advancedAddButton.IsEnabled = true;
-            }
-        }
     }
-
-
 }
