@@ -45,7 +45,7 @@ namespace Late2Meet.Views
             canvas.Save();
 
             using (var image = SKImage.FromBitmap(bmp)) // tried SKImage.FromBitmap(bmp) first and same result
-            using (var data = image.Encode(SKEncodedImageFormat.Png, 1080))
+            using (var data = image.Encode(SKEncodedImageFormat.Png, 80))
             {
                 var encoded = ImageUtility.StreamToString(data.AsStream());
                 byte[] imageBytes;
