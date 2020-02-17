@@ -4,8 +4,8 @@ using System.ComponentModel;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-
 using Late2Meet.Models;
+using System.Drawing;
 
 namespace Late2Meet.Views
 {
@@ -29,12 +29,16 @@ namespace Late2Meet.Views
 
         public async Task NavigateFromMenu(int id)
         {
+
             if (!MenuPages.ContainsKey(id))
             {
                 switch (id)
                 {
                     case (int)MenuItemType.Leaderboard:
                         MenuPages.Add(id, new NavigationPage(new LeaderboardPage()));
+                        break;
+                    case (int)MenuItemType.Analysis:
+                        MenuPages.Add(id, new NavigationPage(new AnalysisPage()));
                         break;
                     case (int)MenuItemType.Settings:
                         MenuPages.Add(id, new NavigationPage(new SettingsPage()));

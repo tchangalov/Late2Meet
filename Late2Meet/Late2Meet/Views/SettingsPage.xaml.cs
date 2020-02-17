@@ -34,13 +34,13 @@ namespace Late2Meet.Views
             });
         }
 
-        async void OnMemberEditClicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MemberEditPage
-            {
-                BindingContext = new Member()
-            });
-        }
+        //async void OnMemberEditClicked(object sender, EventArgs e)
+        //{
+        //    await Navigation.PushAsync(new MemberEditPage
+        //    {
+        //        BindingContext = new Member()
+        //    });
+        //}
 
         async void OnSetDefaultsClicked(object sender, EventArgs e)
         {

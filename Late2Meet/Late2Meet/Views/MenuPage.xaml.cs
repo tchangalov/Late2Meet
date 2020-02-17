@@ -21,6 +21,7 @@ namespace Late2Meet.Views
             menuItems = new List<HomeMenuItem>
             {
                 new HomeMenuItem {Id = MenuItemType.Leaderboard, Title="Leaderboard" },
+                new HomeMenuItem {Id = MenuItemType.Analysis, Title="Analysis" },
                 new HomeMenuItem {Id = MenuItemType.Settings, Title="Settings" },
                 new HomeMenuItem {Id = MenuItemType.About, Title="About" }
             };

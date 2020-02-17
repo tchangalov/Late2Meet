@@ -7,8 +7,8 @@ namespace Late2Meet.Models
     public enum MenuItemType
     {
         Leaderboard,
+        Analysis,
         Settings,
-        Browse,
         About
     }
     public class HomeMenuItem

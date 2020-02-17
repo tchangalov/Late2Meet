@@ -11,6 +11,8 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Late2Meet;
+using Forms9Patch;
 
 namespace Late2Meet.Views
 {
@@ -55,31 +57,6 @@ namespace Late2Meet.Views
         {
             totalAmount.Text = "Total " + String.Format("{0:$#,##0.00}", CurrentTotalAmount);
         }
-        async void SyncClicked(object sender, EventArgs e)
-        {
-            try
-            {
-                var postData = new List<KeyValuePair<string, string>>();
-                postData.Add(new KeyValuePair<string, string>("userId", "5"));
-                postData.Add(new KeyValuePair<string, string>("balance", "350.00"));
-
-                var content = new FormUrlEncodedContent(postData);
-
-                HttpClient client = new HttpClient();
-
-                client.BaseAddress = new Uri("http://192.168.29.200:8080");
-
-                var response = await client.PostAsync("http://192.168.29.200:8080/update.php", content);
-                string result = response.Content.ReadAsStringAsync().Result;
-            }
-
-            catch (Exception ex)
-            {
-                await DisplayAlert("Error", ex.ToString(), "Ok");
-                return;
-            }
-
-        }
 
         async void OnAdvancedBalanceAddClicked(object sender, EventArgs e)
         {
@@ -90,7 +67,7 @@ namespace Late2Meet.Views
 
         public async void OnQuickBalanceAddClicked(Object Sender, EventArgs args)
         {
-            Button button = (Button)Sender;
+            Xamarin.Forms.Button button = (Xamarin.Forms.Button)Sender;
             Member member = (Member)button.CommandParameter;
             await BalanceAddAux(member, BalanceAddValue);
         }
@@ -121,6 +98,75 @@ namespace Late2Meet.Views
         {
             checkEnableOrDisable();
         }
+        public async void onShareButtonClicked(object sender, EventArgs e)
+        {
+
+            var htmlString = constructHtml();
+
+            if (await htmlString.ToPngAsync("output.png") is ToFileResult pngResult)
+            {
+                if (pngResult.IsError)
+                {
+                    using (Toast.Create("PNG Failure", pngResult.Result)) ;
+                }
+                else
+                {
+                    var collection = new Forms9Patch.MimeItemCollection();
+                    collection.AddBytesFromFile("image/png", pngResult.Result);
+                    //Forms9Patch.Clipboard.Entry = collection;
+                    Forms9Patch.Sharing.Share(collection, shareButton);
+                }
+            }
+        }
+
+        /// <summary>
+        /// Adapted using https://www.tablesgenerator.com/html_tables#
+        /// </summary>
+        /// <returns></returns>
+        private string constructHtml()
+        {
+            var startTag = "<html><body>";
+            var title = "<h1 style=\"text-align:center;padding-top:10px;\">Late2Meet</h1>";
+            var tableStart = "<style type=\"text/css\">" +
+                            ".tg  {border-collapse:collapse;border-spacing:0;}" +
+                            ".tg td{font-family:Arial,sans-serif;font-size:14px;padding:5px5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}" +
+                            ".tg th{font-family:Arial,sans-serif;font-size:14px;font-weight:normal;padding:5px5px;border-style:solid;border-width:1px;overflow:hidden;word-break:normal;border-color:black;}" +
+                            ".tg .tg-yutr{font-weight:bold;font-family:Arial,Helvetica,sans-serif!important;;color:#036400;border-color:inherit;text-align:center;vertical-align:top}" +
+                            ".tg .tg-zda1{font-family:Arial,Helvetica,sans-serif!important;;border-color:inherit;text-align:center;vertical-align:top}" +
+                            ".tg .tg-7fle{font-weight:bold;background-color:#efefef;text-align:center;vertical-align:top}" +
+                            ".tg .tg-ud39{font-weight:bold;color:#036400;text-align:center;vertical-align:top}" +
+                            ".tg .tg-0d3g{font-weight:bold;font-family:Arial,Helvetica,sans-serif!important;;background-color:#efefef;border-color:inherit;text-align:center;vertical-align:top}" +
+                            "</style>" +
+                            "<table align=\"center\" class=\"tg\">" +
+                            "  <tr>" +
+                            "    <th class=\"tg-7fle\" colspan=\"2\">Total</th>" +
+                            "  </tr>" +
+                            "  <tr>" +
+                            "    <td class=\"tg-ud39\" colspan=\"2\">" + string.Format("{0:$#,##0.00}", CurrentTotalAmount) + "</td>" +
+                            "  </tr>" +
+                            "  <tr>" +
+                            "    <td class=\"tg-0d3g\">Name</td>" +
+                            "    <td class=\"tg-0d3g\">Balance</td>" +
+                            "  </tr>";
+
+            string addMembers = "";
+
+            foreach (var member in listView.ItemsSource)
+            {
+                addMembers += string.Format("<tr><td class=\"tg-zda1\">{0}</td><td class=\"tg-yutr\">{1}</td></tr>",
+                    ((Member)member).Name,
+                    string.Format("{0:$#,##0.00}", ((Member)member).Balance));
+            }
+
+
+            string timeStamp = DateTime.Now.ToString();
+            var subTitle = String.Format("<p style=\"font-size:10px;text-align:center;\"> As of: {0}</p>", timeStamp);
+
+            var tableEnd = "</table>";
+            var endTag = "</body></html>";
+
+            return startTag + title + tableStart + addMembers + tableEnd + subTitle + endTag;
+        }
 
         public void DeselectEntities()
         {
@@ -139,4 +185,6 @@ namespace Late2Meet.Views
             }
         }
     }
+
+
 }

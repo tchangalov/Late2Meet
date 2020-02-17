@@ -39,7 +39,7 @@
             <BoxView HeightRequest="1" Color="DarkGray"></BoxView>
             
             <Button Clicked="OnMemberAddedClicked" Text="Add Members" />
-            <Button Clicked="OnMemberEditClicked" Text="Edit Members"/>
+            <!--<Button Clicked="OnMemberEditClicked" Text="Edit Members"/>-->
             <Button Clicked="OnMemberDeletedClicked" Text="Remove Members" />
         </StackLayout>
     </ContentPage.Content>

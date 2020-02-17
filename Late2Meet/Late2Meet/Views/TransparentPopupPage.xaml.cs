@@ -47,6 +47,7 @@ namespace Late2Meet.Views
 
         private void BtnAddClicked(object sender, EventArgs eventArgs)
         {
+            EntryButton_Unfocused(null, null);
             IList<object> members = _selectedItems;
             var tasks = new List<Task<int>>();
 
@@ -68,6 +69,7 @@ namespace Late2Meet.Views
 
         private void BtnSetClicked(object sender, EventArgs eventArgs)
         {
+            EntryButton_Unfocused(null, null);
             IList<object> members = _selectedItems;
             var tasks = new List<Task<int>>();
 
@@ -120,29 +122,29 @@ namespace Late2Meet.Views
             PopupNavigation.PopAsync();
         }
 
-        protected override async Task OnDisappearingAnimationBeginAsync()
-        {
-            //if (!IsAnimationEnabled)
-            //    return;
+        //protected override async Task OnDisappearingAnimationBeginAsync()
+        //{
+        //    //if (!IsAnimationEnabled)
+        //    //    return;
 
-            //var taskSource = new TaskCompletionSource<bool>();
+        //    //var taskSource = new TaskCompletionSource<bool>();
 
-            //var currentHeight = FrameContainer.Height;
+        //    //var currentHeight = FrameContainer.Height;
 
-            //FrameContainer.Animate("HideAnimation", d =>
-            //{
-            //    FrameContainer.HeightRequest = d;
-            //},
-            //start: currentHeight,
-            //end: 170,
-            //finished: async (d, b) =>
-            //{
-            //    await Task.Delay(300);
-            //    taskSource.TrySetResult(true);
-            //});
+        //    //FrameContainer.Animate("HideAnimation", d =>
+        //    //{
+        //    //    FrameContainer.HeightRequest = d;
+        //    //},
+        //    //start: currentHeight,
+        //    //end: 170,
+        //    //finished: async (d, b) =>
+        //    //{
+        //    //    await Task.Delay(300);
+        //    //    taskSource.TrySetResult(true);
+        //    //});
 
-            //await taskSource.Task;
-        }
+        //    //await taskSource.Task;
+        //}
 
         protected override void OnAppearingAnimationBegin()
         {
@@ -164,12 +166,12 @@ namespace Late2Meet.Views
             //CloseImage.Opacity = 0;
         }
 
-        protected override async Task OnAppearingAnimationEndAsync()
-        {
-            //await Task.WhenAll(
-            //    CloseImage.FadeTo(1),
-            //    CloseImage.ScaleTo(1, easing: Easing.SpringOut),
-            //    CloseImage.RotateTo(0));
-        }
+        //protected override async Task OnAppearingAnimationEndAsync()
+        //{
+        //    //await Task.WhenAll(
+        //    //    CloseImage.FadeTo(1),
+        //    //    CloseImage.ScaleTo(1, easing: Easing.SpringOut),
+        //    //    CloseImage.RotateTo(0));
+        //}
     }
 }
