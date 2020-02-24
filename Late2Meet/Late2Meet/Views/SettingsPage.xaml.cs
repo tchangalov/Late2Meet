@@ -18,9 +18,10 @@ namespace Late2Meet.Views
             InitializeComponent();
         }
 
+
         async void OnMemberAddedClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new MemberEntryPage
+            await Navigation.PushAsync(new MemberEntryPage(this)
             {
                 BindingContext = new Member()
             });
@@ -54,8 +55,13 @@ namespace Late2Meet.Views
 
         public async void OnResetAllCountsClicked(object sender, EventArgs e)
         {
-            await App.Database.ResetAllCounts();
-            MessagingCenter.Send<MainPage, int>(RootPage, "changeView", (int)MenuItemType.Leaderboard);
+            bool answer = await DisplayAlert("Warning", "Are you sure?", "Yes", "No");
+
+            if (answer)
+            {
+                await App.Database.ResetAllCounts();
+                MessagingCenter.Send<MainPage, int>(RootPage, "changeView", (int)MenuItemType.Leaderboard);
+            }
         }
     }
 }

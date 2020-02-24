@@ -6,9 +6,9 @@
     xmlns:f9p="clr-namespace:Forms9Patch;assembly=Forms9Patch"
     x:Class="Late2Meet.Views.AnalysisPage">
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem Text="Share" Clicked="onShareButtonClicked"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     
     <ContentPage.Content>
         <StackLayout Margin="10">
@@ -26,7 +26,7 @@
 
             <microcharts:ChartView x:Name="chartView"/>
 
-            <f9p:Button  x:Name="shareButton" Text="SHARE PNG" IsVisible="False"/>
+            <f9p:Button x:Name="shareButton" Text="SHARE PNG" IsVisible="False"/>
 
         </StackLayout>
     </ContentPage.Content>

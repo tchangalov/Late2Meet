@@ -46,11 +46,16 @@ namespace Late2Meet.Views
 
         async void OnDeleteAllButtonClicked(object sender, EventArgs e)
         {
-            await App.Database.DeleteAllMembersAsync();
-            UpdateMembersView();
-            DeselectEntities();
-            checkEnableOrDisable();
-            deleteAllButton.IsEnabled = false;
+            bool answer = await DisplayAlert("Warning", "Are you sure?", "Yes", "No");
+            
+            if(answer)
+            {
+                await App.Database.DeleteAllMembersAsync();
+                UpdateMembersView();
+                DeselectEntities();
+                checkEnableOrDisable();
+                deleteAllButton.IsEnabled = false;
+            }
         }
 
         async void OnDeleteSelectedButtonClicked(object sender, EventArgs e)

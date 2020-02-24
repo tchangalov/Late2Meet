@@ -155,4 +155,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\noun_Waiting.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\l2m_logo.png" />
+  </ItemGroup>
 </Project>

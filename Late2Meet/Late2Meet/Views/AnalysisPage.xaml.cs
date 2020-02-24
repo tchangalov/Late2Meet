@@ -35,30 +35,30 @@ namespace Late2Meet.Views
             setContributionPercentage();
         }
 
-        public async void onShareButtonClicked(object sender, EventArgs e)
-        {
-            int width = Convert.ToInt32(chartView.Width);
-            int height = Convert.ToInt32(chartView.Height);
-            var bmp = new SKBitmap(width, height, false);
-            var canvas = new SKCanvas(bmp);
-            chartView.Chart.DrawContent(canvas, width, height);
-            canvas.Save();
+        //public async void onShareButtonClicked(object sender, EventArgs e)
+        //{
+        //    int width = Convert.ToInt32(chartView.Width);
+        //    int height = Convert.ToInt32(chartView.Height);
+        //    var bmp = new SKBitmap(width, height);
+        //    var canvas = new SKCanvas(bmp);
+        //    chartView.Chart.DrawContent(canvas, width, height);
+        //    canvas.Save();
 
-            using (var image = SKImage.FromBitmap(bmp)) // tried SKImage.FromBitmap(bmp) first and same result
-            using (var data = image.Encode(SKEncodedImageFormat.Png, 80))
-            {
-                var encoded = ImageUtility.StreamToString(data.AsStream());
-                byte[] imageBytes;
-                var FileImage = new Image();
-                imageBytes = Convert.FromBase64String(encoded);
-                FileImage.Source = Xamarin.Forms.ImageSource.FromStream(() => new MemoryStream(imageBytes));
-                var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "output_analysis.png");
-                File.WriteAllBytes(path, imageBytes);
-                var collection = new Forms9Patch.MimeItemCollection();
-                collection.AddBytesFromFile("image/png", path);
-                Forms9Patch.Sharing.Share(collection, shareButton);
-            }
-        }
+        //    using (var image = SKImage.FromBitmap(bmp)) // tried SKImage.FromBitmap(bmp) first and same result
+        //    using (var data = image.Encode(SKEncodedImageFormat.Png, 80))
+        //    {
+        //        var encoded = ImageUtility.StreamToString(data.AsStream());
+        //        byte[] imageBytes;
+        //        var FileImage = new Image();
+        //        imageBytes = Convert.FromBase64String(encoded);
+        //        FileImage.Source = Xamarin.Forms.ImageSource.FromStream(() => new MemoryStream(imageBytes));
+        //        var path = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "output_analysis.png");
+        //        File.WriteAllBytes(path, imageBytes);
+        //        var collection = new Forms9Patch.MimeItemCollection();
+        //        collection.AddBytesFromFile("image/png", path);
+        //        Forms9Patch.Sharing.Share(collection, shareButton);
+        //    }
+        //}
 
         private async void setContributionPercentage()
         {
@@ -77,8 +77,12 @@ namespace Late2Meet.Views
             int i = 0;
             foreach (var member in members)
             {
+                if(total == 0)
+                {
+                    return;
+                }
                 decimal pct = (member.Balance / total) * 100;
-                var random = new Random(member.Id);
+                var random = new Random(member.Id + 100);
                 string color = String.Format("#{0:X6}", random.Next(0x1000000));
 
                 string label = null;

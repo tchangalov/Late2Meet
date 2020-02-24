@@ -4,9 +4,10 @@
              x:Class="Late2Meet.Views.MemberEntryPage"
              Title="Member Entry">
     <StackLayout Margin="20"> 
-        <Editor Placeholder="Enter Name" 
+        <Editor x:Name="editorButton" 
+                Placeholder="Enter Name" 
                 Keyboard="Text"
-                Text="{Binding Name}" />
+                Text="{Binding Name}"/>
 
         <Button Text="Save" Clicked="OnSaveButtonClicked" />
     </StackLayout>

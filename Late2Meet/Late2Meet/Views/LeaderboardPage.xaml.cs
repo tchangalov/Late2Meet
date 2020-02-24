@@ -119,6 +119,19 @@ namespace Late2Meet.Views
 
         public async void onShareButtonClicked(object sender, EventArgs e)
         {
+            bool any = false;
+
+            foreach (var temp in listView.ItemsSource)
+            {
+                any = true;
+
+            }
+
+            if (!any)
+            {
+                await DisplayAlert("Warning", "Nothing to send!", "OK");
+                return;
+            }
 
             var htmlString = constructHtml();
 
